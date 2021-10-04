@@ -12,9 +12,18 @@ import { NotImplementedError } from "../extensions/index.js";
  *
  */
 export default function getSeason(date) {
-  if (!(date instanceof Date) || date.getMonth() == "undefined") {
-    return "Invalid date!";
+  if (date === null || date === undefined) {
+    return "Unable to determine the time of year!";
   }
+
+  if (
+    !date ||
+    !(date instanceof Date) ||
+    date.toString !== new Date().toString
+  ) {
+    throw new Error("Invalid date!");
+  }
+
   if (date.getMonth() >= 2 && date.getMonth() < 5) {
     return "spring";
   } else if (date.getMonth() >= 5 && date.getMonth() < 8) {
